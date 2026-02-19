@@ -57,12 +57,40 @@ mvn spring-boot:run
 # Runs on http://localhost:8080
 ```
 
+### Run Backend with New Relic (Recommended)
+We **do not commit real license keys**. Use an environment variable instead.
+
+```bash
+# 1) Copy agent files to a path without spaces (recommended on macOS)
+mkdir -p /tmp/newrelic
+cp backend/newrelic/newrelic.jar /tmp/newrelic/
+cp backend/newrelic/newrelic.yml /tmp/newrelic/
+
+# 2) Export your license key (keep it local)
+export NEW_RELIC_LICENSE_KEY="YOUR_REAL_KEY"
+
+# 3) Run backend with the Java agent
+cd backend
+mvn spring-boot:run \
+  -Dspring-boot.run.jvmArguments="-javaagent:/tmp/newrelic/newrelic.jar -Dnewrelic.config.file=/tmp/newrelic/newrelic.yml"
+```
+
+**IDE run configuration (IntelliJ/VS Code)**
+- VM options:
+  ```
+  -javaagent:/tmp/newrelic/newrelic.jar -Dnewrelic.config.file=/tmp/newrelic/newrelic.yml
+  ```
+- Environment variables:
+  ```
+  NEW_RELIC_LICENSE_KEY=YOUR_REAL_KEY
+  ```
+
 ### Run Frontend
 ```bash
 cd frontend
 # Option 1: VS Code Live Server
 # Option 2: Python simple server
-python3 -m http.server 3000
+python3 -m http.server 3000 --directory "/Users/lovejain/Documents/New project/frontend"
 # Open http://localhost:3000
 ```
 
