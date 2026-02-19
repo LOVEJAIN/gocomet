@@ -47,4 +47,10 @@ public class DriverController {
     public ResponseEntity<ApiResponse<?>> acceptRide(@PathVariable Long id, @RequestParam Long rideId) {
         return ResponseEntity.ok(ApiResponse.ok(rideService.acceptRide(id, rideId)));
     }
+
+    @PostMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<Driver>> updateStatus(@PathVariable Long id,
+            @RequestParam Driver.DriverStatus status) {
+        return ResponseEntity.ok(ApiResponse.ok(driverService.setStatus(id, status)));
+    }
 }
