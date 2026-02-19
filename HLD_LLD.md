@@ -32,6 +32,7 @@
 - **Idempotency keys** on ride creation and payments to prevent duplicates
 - **Auto-assignment**: on ride creation, system finds nearest available driver within 5km
 - **Stateless backend** — all state in DB/Redis, horizontally scalable
+- **Synchronous API only** — all flows are HTTP request/response (no Kafka or async workers) to keep complexity low and suitable for an interview assignment
 
 ---
 
@@ -132,6 +133,27 @@ ORDER BY distance LIMIT 10;
 
 ---
 
+### API Endpoints
+
+| Method | Endpoint | Notes |
+|---|---|---|
+| POST | `/v1/rides` | Create ride request |
+| GET | `/v1/rides` | List rides |
+| GET | `/v1/rides/{id}` | Get ride by ID |
+| POST | `/v1/trips/{id}/start` | Start trip |
+| POST | `/v1/trips/{id}/end` | End trip and calculate fare |
+| POST | `/v1/rides/{id}/cancel` | Cancel ride |
+| POST | `/v1/drivers` | Register driver |
+| GET | `/v1/drivers` | List drivers |
+| GET | `/v1/drivers/{id}` | Get driver by ID |
+| POST | `/v1/drivers/{id}/location` | Update driver GPS |
+| POST | `/v1/drivers/{id}/status?status=AVAILABLE|BUSY|OFFLINE` | Update driver status |
+| POST | `/v1/drivers/{id}/accept?rideId={rideId}` | Driver accepts ride |
+| POST | `/v1/payments` | Process payment |
+| GET | `/v1/payments/ride/{rideId}` | Fetch payment by ride |
+
+---
+
 ### Concurrency & Atomicity
 - `@Transactional` on all write operations
 - Unique constraint on `idempotencyKey` prevents duplicate rides/payments
@@ -161,4 +183,3 @@ ORDER BY distance LIMIT 10;
 - MySQL slow query detection (threshold: 500ms)
 - Alerts: response time > 1s → page on-call
 - Dashboard: active rides, driver availability, surge multiplier trend
-

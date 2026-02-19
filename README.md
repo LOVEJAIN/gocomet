@@ -80,9 +80,12 @@ python3 -m http.server 3000
 | POST | /v1/rides/{id}/cancel | Cancel ride |
 | POST | /v1/drivers | Register driver |
 | GET | /v1/drivers | Get all drivers |
+| GET | /v1/drivers/{id} | Get driver by ID |
 | POST | /v1/drivers/{id}/location | Update driver GPS |
-| POST | /v1/drivers/{id}/accept | Driver accept ride |
+| POST | /v1/drivers/{id}/status?status=AVAILABLE|BUSY|OFFLINE | Update driver status |
+| POST | /v1/drivers/{id}/accept?rideId={rideId} | Driver accept ride |
 | POST | /v1/payments | Process payment |
+| GET | /v1/payments/ride/{rideId} | Get payment by ride |
 
 ---
 
