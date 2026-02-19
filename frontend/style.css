@@ -1,0 +1,127 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; }
+
+header {
+  background: #1a1a2e;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.logo { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+.header-right { display: flex; align-items: center; gap: 14px; }
+.surge-badge {
+  background: #e74c3c;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.live-dot {
+  width: 10px; height: 10px;
+  background: #2ecc71;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; } 50% { opacity:0.4; }
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  flex: 1;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.card h2 { font-size: 18px; font-weight: 600; margin-bottom: 18px; color: #1a1a2e; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.card-header h2 { margin-bottom: 0; }
+
+.form-row { margin-bottom: 14px; }
+.form-row label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 5px; color: #666; }
+.form-row input, .form-row select {
+  width: 100%; padding: 9px 12px;
+  border: 1.5px solid #ddd; border-radius: 8px;
+  font-size: 14px; transition: border-color 0.2s;
+}
+.form-row input:focus, .form-row select:focus {
+  outline: none; border-color: #667eea;
+}
+.coords-row { display: flex; gap: 10px; }
+.coords-row input { flex: 1; }
+
+.btn {
+  padding: 10px 18px; border: none; border-radius: 8px;
+  font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary { background: #667eea; color: white; width: 100%; padding: 12px; font-size: 15px; }
+.btn-primary:hover { background: #5a6fd6; }
+.btn-sm { background: #f0f2f5; color: #555; padding: 6px 14px; font-size: 13px; }
+.btn-sm:hover { background: #e0e3e8; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-secondary:hover { background: #5a6268; }
+.btn-green { background: #27ae60; color: white; }
+.btn-green:hover { background: #219a52; }
+.btn-orange { background: #e67e22; color: white; }
+.btn-orange:hover { background: #cf6d17; }
+.btn-blue { background: #2980b9; color: white; }
+.btn-blue:hover { background: #2471a3; }
+.btn-red { background: #e74c3c; color: white; }
+.btn-red:hover { background: #c0392b; }
+
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+
+.rides-list { max-height: 380px; overflow-y: auto; }
+.ride-card {
+  border: 1.5px solid #eee; border-radius: 10px;
+  padding: 14px; margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+.ride-card:hover { border-color: #667eea; }
+.ride-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.ride-id { font-weight: 700; color: #1a1a2e; }
+.status-badge {
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+}
+.s-requested { background: #fff3cd; color: #856404; }
+.s-driver_assigned { background: #d1ecf1; color: #0c5460; }
+.s-started { background: #d4edda; color: #155724; }
+.s-completed { background: #d4edda; color: #155724; }
+.s-cancelled { background: #f8d7da; color: #721c24; }
+
+.ride-info { margin-top: 8px; font-size: 13px; color: #666; }
+.ride-info span { margin-right: 12px; }
+.fare { font-weight: 700; color: #27ae60; font-size: 15px; }
+
+.empty-state { color: #aaa; font-size: 14px; text-align: center; padding: 30px 0; }
+.msg { margin-top: 12px; font-size: 13px; color: #666; min-height: 20px; }
+.msg.success { color: #27ae60; }
+.msg.error { color: #e74c3c; }
+
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: #1a1a2e; color: white;
+  padding: 12px 20px; border-radius: 8px;
+  font-size: 14px; opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1000;
+}
+.toast.show { opacity: 1; }
+
+@media(max-width: 768px) {
+  .container { flex-direction: column; }
+  .btn-group { flex-direction: column; }
+}

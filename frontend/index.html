@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoComet Rides</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">🚗 GoComet DAW</div>
+    <div class="header-right">
+      <span id="liveIndicator" class="live-dot"></span>
+      <span>Live Dashboard</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Left Panel: Actions -->
+    <div class="panel left-panel">
+
+      <!-- Create Ride -->
+      <div class="card">
+        <h2>📍 Request a Ride</h2>
+        <div class="form-group">
+          <label>Rider ID</label>
+          <input type="number" id="riderId" value="1" />
+        </div>
+        <div class="form-group">
+          <label>Pickup Address</label>
+          <input type="text" id="pickupAddr" value="Koramangala, Bengaluru" />
+        </div>
+        <div class="form-row">
+          <input type="number" id="pickupLat" placeholder="Lat" value="12.9352" step="0.0001" />
+          <input type="number" id="pickupLng" placeholder="Lng" value="77.6245" step="0.0001" />
+        </div>
+        <div class="form-group">
+          <label>Destination Address</label>
+          <input type="text" id="destAddr" value="Indiranagar, Bengaluru" />
+        </div>
+        <div class="form-row">
+          <input type="number" id="destLat" placeholder="Lat" value="12.9784" step="0.0001" />
+          <input type="number" id="destLng" placeholder="Lng" value="77.6408" step="0.0001" />
+        </div>
+        <div class="form-row">
+          <select id="tier">
+            <option value="ECONOMY">Economy</option>
+            <option value="PREMIUM">Premium</option>
+            <option value="SUV">SUV</option>
+          </select>
+          <select id="paymentMethod">
+            <option value="CASH">Cash</option>
+            <option value="CARD">Card</option>
+            <option value="WALLET">Wallet</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" onclick="createRide()">Request Ride</button>
+      </div>
+
+      <!-- Driver Actions -->
+      <div class="card">
+        <h2>🚕 Driver Actions</h2>
+        <div class="form-group">
+          <label>Driver ID</label>
+          <input type="number" id="driverId" value="1" />
+        </div>
+        <div class="form-row">
+          <input type="number" id="driverLat" placeholder="Lat" value="12.9340" step="0.0001" />
+          <input type="number" id="driverLng" placeholder="Lng" value="77.6230" step="0.0001" />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-secondary" onclick="updateDriverLocation()">📡 Update Location</button>
+          <button class="btn btn-green" onclick="setDriverStatus('AVAILABLE')">✅ Go Online</button>
+          <button class="btn btn-gray" onclick="setDriverStatus('OFFLINE')">❌ Go Offline</button>
+        </div>
+        <div class="form-group" style="margin-top:12px">
+          <label>Accept Ride ID</label>
+          <div class="form-row">
+            <input type="number" id="acceptRideId" placeholder="Ride ID" />
+            <button class="btn btn-primary" onclick="acceptRide()">Accept</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ride Lifecycle -->
+      <div class="card">
+        <h2>🔄 Ride Lifecycle</h2>
+        <div class="form-group">
+          <label>Ride ID</label>
+          <input type="number" id="lifecycleRideId" placeholder="Ride ID" />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-green" onclick="startTrip()">▶ Start Trip</button>
+          <button class="btn btn-orange" onclick="endTrip()">⏹ End Trip</button>
+          <button class="btn btn-red" onclick="cancelRide()">✖ Cancel</button>
+        </div>
+        <div class="form-group" style="margin-top:12px">
+          <label>Pay for Ride</label>
+          <div class="form-row">
+            <input type="number" id="payRideId" placeholder="Ride ID" />
+            <button class="btn btn-primary" onclick="payRide()">💳 Pay</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Register Driver -->
+      <div class="card">
+        <h2>➕ Register Driver</h2>
+        <div class="form-row">
+          <input type="text" id="driverName" placeholder="Name" value="Raju Kumar" />
+          <input type="text" id="driverPhone" placeholder="Phone" value="9876543210" />
+        </div>
+        <div class="form-row">
+          <select id="driverVehicleType">
+            <option value="ECONOMY">Economy</option>
+            <option value="PREMIUM">Premium</option>
+            <option value="SUV">SUV</option>
+          </select>
+          <input type="text" id="driverVehicleNo" placeholder="Vehicle No" value="KA01AB1234" />
+        </div>
+        <button class="btn btn-secondary" onclick="registerDriver()">Register Driver</button>
+      </div>
+    </div>
+
+    <!-- Right Panel: Live Data -->
+    <div class="panel right-panel">
+      <!-- Live Status -->
+      <div class="card">
+        <div class="card-header">
+          <h2>📊 Live Rides</h2>
+          <button class="btn btn-sm" onclick="fetchRides()">🔄 Refresh</button>
+        </div>
+        <div id="ridesTable">
+          <p class="empty-msg">Loading rides...</p>
+        </div>
+      </div>
+
+      <!-- Drivers -->
+      <div class="card">
+        <div class="card-header">
+          <h2>👥 Drivers</h2>
+          <button class="btn btn-sm" onclick="fetchDrivers()">🔄 Refresh</button>
+        </div>
+        <div id="driversTable">
+          <p class="empty-msg">Loading drivers...</p>
+        </div>
+      </div>
+
+      <!-- Log -->
+      <div class="card">
+        <div class="card-header">
+          <h2>📋 Activity Log</h2>
+          <button class="btn btn-sm" onclick="clearLog()">Clear</button>
+        </div>
+        <div id="activityLog" class="log-box"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
