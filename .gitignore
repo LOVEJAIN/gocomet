@@ -20,3 +20,4 @@ Thumbs.db
 newrelic.jar
 newrelic.yml
 logs/
+backend/newrelic/
