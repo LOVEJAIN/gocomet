@@ -1,0 +1,32 @@
+artifacts = ["/app/report.json"]
+
+[task]
+name = "dynamo/log-report"
+description = "Summarize failure events from an application log into a JSON report."
+
+[metadata]
+category = "data_analysis"
+subcategory = "log_processing"
+task_objective = ["structured_extraction", "aggregation"]
+artifact_type = ["json_report"]
+expert_time_estimate_hours = 0.3
+model_tested = "GPT-5.4"
+agent_tested = "Terminus-2"
+difficulty_explanation = "The task is straightforward to implement, but it requires careful alignment between the prompt, output schema, and verifier."
+solution_explanation = "Parse the JSONL log, keep only ERROR and CRITICAL events, aggregate counts by service, derive the highest-severity service, and write the requested JSON report."
+verification_explanation = "The verifier checks the exact JSON structure and values for each numbered success criterion, rather than only checking file existence."
+
+[verifier]
+timeout_sec = 120.0
+
+[agent]
+timeout_sec = 120.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+allow_internet = false
+mcp_servers = []

@@ -1,0 +1,8 @@
+{"timestamp":"2026-06-01T10:00:00Z","service":"auth","level":"INFO","user_id":"u100","message":"login started"}
+{"timestamp":"2026-06-01T10:00:03Z","service":"auth","level":"ERROR","user_id":"u100","message":"invalid password hash"}
+{"timestamp":"2026-06-01T10:01:10Z","service":"billing","level":"WARN","user_id":"u222","message":"retrying payment"}
+{"timestamp":"2026-06-01T10:01:12Z","service":"billing","level":"ERROR","user_id":"u222","message":"payment gateway timeout"}
+{"timestamp":"2026-06-01T10:02:00Z","service":"search","level":"ERROR","user_id":"u900","message":"index shard unavailable"}
+{"timestamp":"2026-06-01T10:02:20Z","service":"auth","level":"CRITICAL","user_id":"u100","message":"token signer offline"}
+{"timestamp":"2026-06-01T10:03:05Z","service":"billing","level":"ERROR","user_id":"u333","message":"duplicate capture prevented"}
+{"timestamp":"2026-06-01T10:03:30Z","service":"search","level":"INFO","user_id":"u900","message":"recovery started"}

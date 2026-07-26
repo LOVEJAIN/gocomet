@@ -1,0 +1,15 @@
+{
+  "error_count_by_service": {
+    "auth": 2,
+    "billing": 2,
+    "search": 1
+  },
+  "highest_severity_service": "auth",
+  "earliest_error_timestamp": "2026-06-01T10:00:03Z",
+  "affected_user_ids": [
+    "u100",
+    "u222",
+    "u333",
+    "u900"
+  ]
+}
